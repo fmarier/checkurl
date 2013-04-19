@@ -17,6 +17,7 @@ import requests
 # - requests to verifier - don't allow GET? Only allow POST /verify?
 
 verify_args = { 'assertion': 'foo', 'audience': 'bar' }
+bid_args = { 'foo': 'bar' }
 
 # URL like /v/b7cb529baa/production/communication_iframe.js change in each
 # train. Use this to figure out what it is currently known as.
@@ -86,6 +87,11 @@ def dummy_verify(response):
   except:
     print ("  ERROR: wrong response: got non conforming json response: %s" %
            (response.text))
+
+def dummy_bid(response):
+  if response.text != 'Forbidden: no cookie':
+    print ("  ERROR: wrong response: got: %s, expected '%s'" %
+      (response.text, 'Forbidden: no cookie'))
 
 def disallowed_verify(response):
   try:
@@ -230,6 +236,8 @@ checks = rewrite_checks(
     { 'meth': 'POST', 'rc': 404, 'check': disallowed_verify, 'postargs': verify_args, 'url': 'https://static.login.anosrep.org/verify' },
     { 'meth': 'POST', 'rc': 404, 'check': disallowed_verify, 'postargs': verify_args, 'url': 'https://login.anosrep.org/verify' },
     { 'meth': 'POST', 'rc': 405, 'url': 'https://login.anosrep.org/' },
+    { 'meth': 'POST', 'rc': 403, 'check': dummy_bid, 'postargs': bid_args, 'url': 'https://login.anosrep.org/wsapi/stage_user' },
+    { 'meth': 'POST', 'rc': 403, 'check': dummy_bid, 'postargs': bid_args, 'url': 'https://www.anosrep.org/wsapi/stage_user' },
 ])
 
 
