@@ -98,9 +98,9 @@ def dummy_bid(response):
 
 def disallowed_verify(response):
   try:
-    if response.json()['status'] != 'failure':
+    if response.json()['error'] != 'This is not a valid URL to POST to':
       print ("  ERROR: wrong response: got: %s, expected '%s'" %
-             (response.json()['status'], 'failure'))
+             (response.json()['status'], 'This is not a valid URL to POST to'))
   except:
     print ("  ERROR: wrong response: got non conforming json response: %s" %
            (response.text))
@@ -240,7 +240,7 @@ checks = rewrite_checks(
     { 'meth': 'POST', 'rc': 200, 'check': dummy_verify, 'postargs': verify_args, 'url': 'https://login.anosrep.org/verify' },
     { 'meth': 'POST', 'rc': 405, 'url': 'https://login.anosrep.org/' },
     { 'meth': 'POST', 'rc': 403, 'check': dummy_bid, 'postargs': bid_args, 'url': 'https://login.anosrep.org/wsapi/stage_user' },
-    { 'meth': 'POST', 'rc': 404, 'check': dummy_bid, 'postargs': bid_args, 'url': 'https://www.anosrep.org/wsapi/stage_user' },
+    { 'meth': 'POST', 'rc': 400, 'check': disallowed_verify, 'postargs': bid_args, 'url': 'https://www.anosrep.org/wsapi/stage_user' },
 ])
 
 
