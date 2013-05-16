@@ -71,10 +71,13 @@ def get_static_png(persona_org):
 
 # checker functions
 def post_http(response):
-  if response.json().get('error') != 'Please use HTTPS rather than HTTP':
-    print ("  ERROR: wrong response: got: %s, expected '%s'" %
-           (response.text, '{"error": "Please use HTTPS rather than HTTP"}'))
-
+  try:
+    if response.json().get('error') != 'Please use HTTPS rather than HTTP':
+      print ("  ERROR: wrong response: got: %s, expected '%s'" %
+             (response.text, '{"error": "Please use HTTPS rather than HTTP"}'))
+  except:
+    print ("  ERROR: wrong response: got non conforming json response: %s" %
+           (response.text))
 
 def dummy_verify(response):
   try:
