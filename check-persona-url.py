@@ -242,6 +242,8 @@ checks = rewrite_checks(
     { 'meth': 'POST', 'rc': 400, 'check': disallowed_verify, 'postargs': verify_args, 'url': 'https://login.anosrep.org/' },
     { 'meth': 'POST', 'rc': 403, 'check': dummy_bid, 'postargs': bid_args, 'url': 'https://login.anosrep.org/wsapi/stage_user' },
     { 'meth': 'POST', 'rc': 400, 'check': disallowed_verify, 'postargs': bid_args, 'url': 'https://www.anosrep.org/wsapi/stage_user' },
+    { 'meth': 'POST', 'rc': 400, 'check': disallowed_verify, 'postargs': bid_args, 'url': 'https://static.login.anosrep.org/wsapi/stage_user' },
+    { 'meth': 'POST', 'rc': 400, 'check': disallowed_verify, 'postargs': bid_args, 'url': 'https://verifier.login.anosrep.org/wsapi/stage_user' },
 ])
 
 
