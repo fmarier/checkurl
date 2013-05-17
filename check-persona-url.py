@@ -142,7 +142,7 @@ checks = rewrite_checks(
     { 'meth': 'GET', 'rc': 301, 'url': 'http://www.diresworb.org/',          'redir': 'https://login.anosrep.org/' },
     { 'meth': 'GET', 'rc': 301, 'url': 'http://www.diresworb.org/about',     'redir': 'https://login.anosrep.org/about' },
     { 'meth': 'GET', 'rc': 301, 'url': 'http://anosrep.org/',                'redir': 'https://login.anosrep.org/' },
-    { 'meth': 'GET', 'rc': 404, 'url': 'http://anosrep.org/about' },
+    { 'meth': 'GET', 'rc': 301, 'url': 'http://anosrep.org/about',           'redir': 'https://login.anosrep.org/about' },
     { 'meth': 'GET', 'rc': 301, 'url': 'http://www.anosrep.org/',            'redir': 'https://anosrep.org/' },
     { 'meth': 'GET', 'rc': 404, 'url': 'http://www.anosrep.org/about' },
     { 'meth': 'GET', 'rc': 301, 'url': 'http://verifier.login.anosrep.org/', 'redir': 'https://login.anosrep.org/' },
@@ -177,7 +177,7 @@ checks = rewrite_checks(
     { 'meth': 'GET', 'rc': 301, 'url': 'https://www.diresworb.org/',         'redir': 'https://login.anosrep.org/' },
     { 'meth': 'GET', 'rc': 301, 'url': 'https://www.diresworb.org/about',    'redir': 'https://login.anosrep.org/about' },
     { 'meth': 'GET', 'rc': 301, 'url': 'https://anosrep.org/',               'redir': 'https://login.anosrep.org/' },
-    { 'meth': 'GET', 'rc': 404, 'url': 'https://anosrep.org/about' },
+    { 'meth': 'GET', 'rc': 301, 'url': 'https://anosrep.org/about', 'redir': 'https://login.anosrep.org/about' },
     { 'meth': 'GET', 'rc': 301, 'url': 'https://www.anosrep.org/',           'redir': 'https://anosrep.org/' },
     { 'meth': 'GET', 'rc': 404, 'url': 'https://www.anosrep.org/about' },
     { 'meth': 'GET', 'rc': 301, 'url': 'https://verifier.login.anosrep.org/', 'redir': 'https://login.anosrep.org/' },
@@ -218,14 +218,14 @@ checks = rewrite_checks(
     #{ 'meth': 'GET', 'rc': 200, 'url': 'https://login.anosrep.org/provisioning_api.orig.js' },
 
     # POST to /verify over HTTP => 400 with 'Please use HTTPS rather than HTTP'.
-    { 'meth': 'POST', 'rc': 404, 'check': post_http, 'postargs': verify_args, 'url': 'http://diresworb.org/verify' },
-    { 'meth': 'POST', 'rc': 404, 'check': post_http, 'postargs': verify_args, 'url': 'http://www.diresworb.org/verify' },
-    { 'meth': 'POST', 'rc': 404, 'check': post_http, 'postargs': verify_args, 'url': 'http://anosrep.org/verify' },
-    { 'meth': 'POST', 'rc': 404, 'check': post_http, 'postargs': verify_args, 'url': 'http://www.anosrep.org/verify' },
-    { 'meth': 'POST', 'rc': 404, 'check': post_http, 'postargs': verify_args, 'url': 'http://verifier.login.anosrep.org/verify' },
-    { 'meth': 'POST', 'rc': 404, 'check': post_http, 'postargs': verify_args, 'url': 'http://static.login.anosrep.org/verify' },
-    { 'meth': 'POST', 'rc': 404, 'check': post_http, 'postargs': verify_args, 'url': 'http://login.anosrep.org/verify' },
-    { 'meth': 'POST', 'rc': 405, 'url': 'http://login.anosrep.org/' },
+    { 'meth': 'POST', 'rc': 403, 'postargs': verify_args, 'url': 'http://diresworb.org/verify' },
+    { 'meth': 'POST', 'rc': 400, 'check': post_http, 'postargs': verify_args, 'url': 'http://www.diresworb.org/verify' },
+    { 'meth': 'POST', 'rc': 403, 'postargs': verify_args, 'url': 'http://anosrep.org/verify' },
+    { 'meth': 'POST', 'rc': 400, 'check': post_http, 'postargs': verify_args, 'url': 'http://www.anosrep.org/verify' },
+    { 'meth': 'POST', 'rc': 400, 'check': post_http, 'postargs': verify_args, 'url': 'http://verifier.login.anosrep.org/verify' },
+    { 'meth': 'POST', 'rc': 400, 'check': post_http, 'postargs': verify_args, 'url': 'http://static.login.anosrep.org/verify' },
+    { 'meth': 'POST', 'rc': 400, 'check': post_http, 'postargs': verify_args, 'url': 'http://login.anosrep.org/verify' },
+    { 'meth': 'POST', 'rc': 400, 'check': post_http, 'postargs': verify_args, 'url': 'http://login.anosrep.org/' },
 
     # POST to /verify over HTTPS. Odd test here in which I pass in arguments
     # that will return 200 with a specific message that tells me that I
@@ -239,7 +239,7 @@ checks = rewrite_checks(
     { 'meth': 'POST', 'rc': 400, 'check': disallowed_verify, 'postargs': verify_args, 'url': 'https://verifier.login.anosrep.org/' },
     { 'meth': 'POST', 'rc': 200, 'check': dummy_verify, 'postargs': verify_args, 'url': 'https://static.login.anosrep.org/verify' },
     { 'meth': 'POST', 'rc': 200, 'check': dummy_verify, 'postargs': verify_args, 'url': 'https://login.anosrep.org/verify' },
-    { 'meth': 'POST', 'rc': 405, 'url': 'https://login.anosrep.org/' },
+    { 'meth': 'POST', 'rc': 400, 'check': disallowed_verify, 'postargs': verify_args, 'url': 'https://login.anosrep.org/' },
     { 'meth': 'POST', 'rc': 403, 'check': dummy_bid, 'postargs': bid_args, 'url': 'https://login.anosrep.org/wsapi/stage_user' },
     { 'meth': 'POST', 'rc': 400, 'check': disallowed_verify, 'postargs': bid_args, 'url': 'https://www.anosrep.org/wsapi/stage_user' },
 ])
