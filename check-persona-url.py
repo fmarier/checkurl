@@ -64,7 +64,7 @@ def get_static_png(persona_org):
     print '  ERROR: Could not find background-image url in /%s' % css_file
     return
   path = match.group(1)
-  if not path.endswith('/common/i/closex.png'):
+  if not path.endswith('/dialog/i/persona_watermark_dark_sm.png'):
     print '  ERROR: Found background-image url but it is the wrong one: %s' % path
     return
   return path
