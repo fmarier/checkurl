@@ -153,9 +153,11 @@ checks = rewrite_checks(
     { 'meth': 'GET', 'rc': 301, 'url': 'http://login.anosrep.org/',          'redir': 'https://login.anosrep.org/' },
     { 'meth': 'GET', 'rc': 301, 'url': 'http://login.anosrep.org/about',     'redir': 'https://login.anosrep.org/about' },
 
+    { 'meth': 'GET', 'rc': 404, 'url': 'http://anosrep.org/include.js' },
     { 'meth': 'GET', 'rc': 404, 'url': 'http://static.login.anosrep.org/include.js' },
     { 'meth': 'GET', 'rc': 404, 'url': 'http://login.anosrep.org/include.js' },
     { 'meth': 'GET', 'rc': 404, 'url': 'http://verifier.login.anosrep.org/include.js' },
+    { 'meth': 'GET', 'rc': 404, 'url': 'http://anosrep.org/include.orig.js' },
     { 'meth': 'GET', 'rc': 404, 'url': 'http://static.login.anosrep.org/include.orig.js' },
     { 'meth': 'GET', 'rc': 404, 'url': 'http://login.anosrep.org/include.orig.js' },
 
