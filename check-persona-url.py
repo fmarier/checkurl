@@ -14,7 +14,7 @@ import requests
 # - GETs to the old domains MUST redirect to the new domain
 # - www. MUST always redirect
 # - requests to static MUST NOT redirect
-# - requests to verifier - don't allow GET? Only allow POST /verify?
+# - only allow POST /verify?
 
 verify_args = { 'assertion': 'foo', 'audience': 'bar' }
 bid_args = { 'foo': 'bar' }
@@ -183,7 +183,7 @@ checks = rewrite_checks(
     { 'meth': 'GET', 'rc': 301, 'url': 'https://www.anosrep.org/',           'redir': 'https://anosrep.org/' },
     { 'meth': 'GET', 'rc': 404, 'url': 'https://www.anosrep.org/about' },
     { 'meth': 'GET', 'rc': 301, 'url': 'https://verifier.login.anosrep.org/', 'redir': 'https://login.anosrep.org/' },
-    { 'meth': 'GET', 'rc': 404, 'url': 'https://verifier.login.anosrep.org/verify' },
+    { 'meth': 'GET', 'rc': 405, 'url': 'https://verifier.login.anosrep.org/verify' },
     { 'meth': 'GET', 'rc': 404, 'url': 'https://login.anosrep.org/verify' },
     { 'meth': 'GET', 'rc': 301, 'url': 'https://static.login.anosrep.org/',  'redir': 'https://login.anosrep.org/' },
     { 'meth': 'GET', 'rc': 200, 'url': 'https://static.login.anosrep.org/__STATIC_JS__' },
