@@ -221,7 +221,7 @@ checks = rewrite_checks(
 
     # POST to /verify over HTTP => 400 with 'Please use HTTPS rather than HTTP'.
     { 'meth': 'POST', 'rc': 403, 'postargs': verify_args, 'url': 'http://diresworb.org/verify' },
-    { 'meth': 'POST', 'rc': 400, 'check': post_http, 'postargs': verify_args, 'url': 'http://www.diresworb.org/verify' },
+    { 'meth': 'POST', 'rc': 403, 'postargs': verify_args, 'url': 'http://www.diresworb.org/verify' },
     { 'meth': 'POST', 'rc': 403, 'postargs': verify_args, 'url': 'http://anosrep.org/verify' },
     { 'meth': 'POST', 'rc': 400, 'check': post_http, 'postargs': verify_args, 'url': 'http://www.anosrep.org/verify' },
     { 'meth': 'POST', 'rc': 400, 'check': post_http, 'postargs': verify_args, 'url': 'http://verifier.login.anosrep.org/verify' },
